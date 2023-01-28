@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="bg-red-300">
+    <div className="bg-slate-400 mb-7">
       <div className="navbar container m-auto">
         <div className="flex-1">
           <Link to="/" className="btn btn-ghost normal-case text-xl">
