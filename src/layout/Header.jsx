@@ -5,6 +5,7 @@ import { userLoggedOut } from "../features/auth/authSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
+
   const handleLogOut = () => {
     // clear redux store
     dispatch(userLoggedOut());

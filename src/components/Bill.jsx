@@ -1,13 +1,14 @@
 import React from "react";
 
-const Bill = () => {
+const Bill = ({ data }) => {
+  const { amount, billingId, email, name, phone } = data || {};
   return (
-    <tr className="text-center">
-      <th>1</th>
-      <td>Cy Ganderton</td>
-      <td>Quality Control Specialist</td>
-      <td>Blue</td>
-      <td>Blue</td>
+    <tr className="text-center bg-white border">
+      <td>{billingId}</td>
+      <th>{name}</th>
+      <td>{email}</td>
+      <td>{phone}</td>
+      <td>{amount}</td>
       <td>
         <button className="btn btn-xs">Edit</button> |{" "}
         <button className="btn btn-xs">Delete</button>

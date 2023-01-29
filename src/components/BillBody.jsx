@@ -1,42 +1,40 @@
 import React from "react";
-import Bill from "./Bill";
-import Pagination from "./Pagination";
+import { useGetBillQuery } from "../features/billing/billingApi";
+import Loader from "../shared/loader/Loader";
+import Error from "../shared/ui/Error";
+import Table from "./Table";
 
 const BillBody = () => {
-  return (
-    <div className="container m-auto bg-slate-400 p-6 ">
-      <div className="overflow-x-auto">
-        <table className="table w-full">
-          {/* <!-- head --> */}
-          <thead>
-            <tr className="text-center">
-              <th>Billing ID</th>
-              <th>Full Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Paid Amount</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* <!-- row 1 --> */}
-            <Bill />
-            <Bill />
-            <Bill />
-            <Bill />
-            <Bill />
-            <Bill />
-            <Bill />
-            <Bill />
-            <Bill />
-          </tbody>
-        </table>
-      </div>
-      <div className="pt-4 flex justify-center items-center">
-        <Pagination />
-      </div>
-    </div>
-  );
+  const {
+    data: bills,
+    isLoading,
+    isError,
+    isSuccess,
+  } = useGetBillQuery(null, { refetchOnFocus: true });
+  console.log(bills);
+
+  // what is render
+  let content = null;
+  if (isLoading) {
+    content = <Loader />;
+  }
+
+  if (!isLoading && isError) {
+    content = <Error message="Data fetching error" />;
+  }
+
+  if (!isLoading && !isError && bills.length === 0) {
+    content = (
+      <p className="text-center text-2xl capitalize">
+        No Billed Found in Database
+      </p>
+    );
+  }
+  if (!isLoading && !isError && bills.length > 0) {
+    content = <Table bills={bills} />;
+  }
+
+  return <div className="container m-auto bg-slate-400 p-6 ">{content}</div>;
 };
 
 export default BillBody;

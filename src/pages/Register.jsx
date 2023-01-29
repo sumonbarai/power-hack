@@ -11,7 +11,7 @@ export default function Register() {
   const [agree, setAgree] = useState(false);
   const navigate = useNavigate();
   //  register api request
-  const [register, { data: user, isLoading, isError }] = useRegisterMutation();
+  const [register, { data: user, isLoading }] = useRegisterMutation();
   // empty from
   const emptyForm = () => {
     setName("");
@@ -142,6 +142,7 @@ export default function Register() {
               <button
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-slate-400 hover:bg-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400"
+                disabled={isLoading}
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
                 Sign up

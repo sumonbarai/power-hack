@@ -11,6 +11,7 @@ const apiSlice = createApi({
       return headers;
     },
   }),
+  tagTypes: ["allBill"],
   endpoints: (builder) => ({}),
 });
 export default apiSlice;

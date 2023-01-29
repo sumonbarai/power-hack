@@ -8,7 +8,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   // login api request
-  const [login, { data: user }] = useLoginMutation();
+  const [login, { data: user, isLoading }] = useLoginMutation();
   // empty from
   const emptyForm = () => {
     setEmail("");
@@ -93,6 +93,7 @@ export default function Login() {
               <button
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-slate-400 hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                disabled={isLoading}
               >
                 Sign in
               </button>
