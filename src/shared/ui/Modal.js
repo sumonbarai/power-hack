@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { useAddBillMutation } from "../../features/billing/billingApi";
+import { addDemo } from "../../features/demoSlice";
 import Error from "../ui/Error";
 import getBillingId from "./getBillingId";
 import Success from "./Success";
@@ -12,6 +14,7 @@ const Modal = ({ open, control }) => {
   const [amount, setAmount] = useState("");
   const [customError, setCustomError] = useState("");
   const [addBill, { data, isSuccess, isLoading }] = useAddBillMutation();
+  const dispatch = useDispatch();
 
   // empty from
   const emptyForm = () => {
@@ -31,9 +34,12 @@ const Modal = ({ open, control }) => {
       amount,
     };
     if (phone.length === 11) {
+      // at first demo local redux store update then server update request
+      dispatch(addDemo({ name, email, phone, amount }));
       addBill(data);
       emptyForm();
       setCustomError("");
+      control();
     } else {
       setCustomError("Invalid Phone Number");
     }

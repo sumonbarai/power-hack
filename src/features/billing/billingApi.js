@@ -11,6 +11,7 @@ const billingApi = apiSlice.injectEndpoints({
         }),
         invalidatesTags: ["allBill"],
       }),
+
       getBill: builder.query({
         query: () => ({
           url: "billing-list",
