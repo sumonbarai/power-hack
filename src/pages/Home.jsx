@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import BillBody from "../components/BillBody";
 import BillTitleBar from "../components/BillTitleBar";
+import Header from "../layout/Header";
 
 const Home = () => {
   return (
     <>
+      <Header />
       <BillTitleBar />
       <BillBody />
     </>
