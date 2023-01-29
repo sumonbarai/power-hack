@@ -25,8 +25,21 @@ const billingApi = apiSlice.injectEndpoints({
         }),
         invalidatesTags: ["allBill"],
       }),
+
+      updateBill: builder.mutation({
+        query: ({ _id, editedData }) => ({
+          url: `billing-list/${_id}`,
+          method: "PATCH",
+          body: editedData,
+        }),
+        invalidatesTags: ["allBill"],
+      }),
     };
   },
 });
-export const { useAddBillMutation, useGetBillQuery, useDeleteBillMutation } =
-  billingApi;
+export const {
+  useAddBillMutation,
+  useGetBillQuery,
+  useDeleteBillMutation,
+  useUpdateBillMutation,
+} = billingApi;

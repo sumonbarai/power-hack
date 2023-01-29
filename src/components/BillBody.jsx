@@ -11,7 +11,6 @@ const BillBody = () => {
     isError,
     isSuccess,
   } = useGetBillQuery(null, { refetchOnFocus: true });
-  console.log(bills);
 
   // what is render
   let content = null;

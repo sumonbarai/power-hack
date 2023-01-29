@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Bill from "./Bill";
+import Modal from "./Modal";
 import Pagination from "./Pagination";
 
 const Table = ({ bills }) => {
+  const [opened, setOpened] = useState(false);
+  const [updateData, setUpdateData] = useState({});
+
+  const controlModal = (data) => {
+    setOpened((prevState) => !prevState);
+    setUpdateData(data);
+  };
   return (
     <>
       <div className="overflow-x-auto">
@@ -18,13 +26,16 @@ const Table = ({ bills }) => {
             <th>Action</th>
           </tr>
           {bills.map((data) => (
-            <Bill key={data._id} data={data} />
+            <Bill key={data._id} data={data} control={controlModal} />
           ))}
         </table>
       </div>
       <div className="pt-4 flex justify-center items-center">
         <Pagination />
       </div>
+      {opened && (
+        <Modal open={opened} control={controlModal} updateData={updateData} />
+      )}
     </>
   );
 };

@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { userLoggedOut } from "../features/auth/authSlice";
+import { useGetBillQuery } from "../features/billing/billingApi";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { data: bills } = useGetBillQuery();
+
+  // total amount calculation
+
+  const initialValue = 0;
+  const sumOfAmount = bills?.reduce(
+    (accumulator, currentValue) => accumulator + Number(currentValue.amount),
+    initialValue
+  );
 
   const handleLogOut = () => {
     // clear redux store
@@ -21,7 +31,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex-none">
-          <p className="font-semibold">Paid Total = 0</p>
+          <p className="font-semibold">{`Paid Total = ${sumOfAmount}`}</p>
           <button
             onClick={() => handleLogOut()}
             className="btn btn-xs ml-3 capitalize"

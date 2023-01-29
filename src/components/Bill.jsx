@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useDeleteBillMutation } from "../features/billing/billingApi";
 
-const Bill = ({ data }) => {
+const Bill = ({ data, control }) => {
   const [deleteBill, { data: billDeleted, isSuccess }] =
     useDeleteBillMutation();
   const { _id, amount, billingId, email, name, phone } = data || {};
@@ -13,6 +13,10 @@ const Bill = ({ data }) => {
     if (confirmDelete) {
       deleteBill(_id);
     }
+  };
+  // update data passing one step up in modal
+  const handleEdit = () => {
+    control(data);
   };
 
   // success message toast
@@ -29,7 +33,10 @@ const Bill = ({ data }) => {
       <td>{phone}</td>
       <td>{amount}</td>
       <td>
-        <button className="btn btn-xs">Edit</button> |{" "}
+        <button className="btn btn-xs" onClick={handleEdit}>
+          Edit
+        </button>{" "}
+        |{" "}
         <button className="btn btn-xs" onClick={handleDelete}>
           Delete
         </button>
