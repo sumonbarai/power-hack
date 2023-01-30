@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Bill from "./Bill";
 import getBillingId from "../shared/ui/getBillingId";
@@ -9,7 +9,9 @@ const Table = ({ bills }) => {
   const [opened, setOpened] = useState(false);
   const [updateData, setUpdateData] = useState({});
   const demo = useSelector((state) => state.demo);
-  const { sliceStart, sliceEnd } = useSelector((state) => state.filter);
+  const { sliceStart, sliceEnd, name, email, phone } = useSelector(
+    (state) => state.filter
+  );
 
   const demoBills = [
     { ...demo, _id: getBillingId(8) },
@@ -20,6 +22,22 @@ const Table = ({ bills }) => {
     setOpened((prevState) => !prevState);
     setUpdateData(data);
   };
+
+  // filtering function
+  const filtering = (f) => {
+    if (name) {
+      return f.name.toLowerCase().includes(name.toLowerCase());
+    }
+    if (email) {
+      return f.email.toLowerCase().includes(email.toLowerCase());
+    }
+    if (phone) {
+      return f.phone.includes(phone);
+    }
+
+    return true;
+  };
+
   return (
     <>
       <div className="overflow-x-auto">
@@ -45,6 +63,7 @@ const Table = ({ bills }) => {
             bills
               .slice()
               .reverse()
+              .filter(filtering)
               .slice(sliceStart, sliceEnd)
               .map((data) => (
                 <Bill key={data._id} data={data} control={controlModal} />

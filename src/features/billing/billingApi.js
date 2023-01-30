@@ -5,7 +5,7 @@ const billingApi = apiSlice.injectEndpoints({
     return {
       addBill: builder.mutation({
         query: (data) => ({
-          url: "billing-list",
+          url: "add-billing",
           method: "POST",
           body: data,
         }),
@@ -21,7 +21,7 @@ const billingApi = apiSlice.injectEndpoints({
 
       deleteBill: builder.mutation({
         query: (_id) => ({
-          url: `billing-list/${_id}`,
+          url: `delete-billing/${_id}`,
           method: "DELETE",
         }),
         invalidatesTags: ["allBill"],
@@ -29,7 +29,7 @@ const billingApi = apiSlice.injectEndpoints({
 
       updateBill: builder.mutation({
         query: ({ _id, editedData }) => ({
-          url: `billing-list/${_id}`,
+          url: `update-billing/${_id}`,
           method: "PATCH",
           body: editedData,
         }),

@@ -98,7 +98,11 @@ export default function Login() {
                 Sign in
               </button>
             </div>
-
+            <div className="text-zinc-400">
+              <p> Demo Login user: </p>
+              <p>Email : abc@gmail.com</p>
+              <p>PassWord : 123456</p>
+            </div>
             {user?.errorMessage && <Error message={user.errorMessage} />}
           </form>
         </div>

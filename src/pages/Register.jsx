@@ -9,6 +9,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agree, setAgree] = useState(false);
+  const [customError, setCustomError] = useState("");
   const navigate = useNavigate();
   //  register api request
   const [register, { data: user, isLoading }] = useRegisterMutation();
@@ -29,6 +30,7 @@ export default function Register() {
     };
     if (agree && password === confirmPassword) {
       register(data);
+      setCustomError("");
       emptyForm();
     }
   };
@@ -36,6 +38,10 @@ export default function Register() {
   useEffect(() => {
     if (user?.accessToken) {
       navigate("/", { replace: true });
+      setCustomError("");
+    }
+    if (user?.errorMessage) {
+      setCustomError(user?.errorMessage);
     }
   }, [user, navigate]);
   return (
@@ -152,6 +158,7 @@ export default function Register() {
           {!(password === confirmPassword) && (
             <Error message={"password not match"} />
           )}
+          {customError && <Error message={customError} />}
         </div>
       </div>
     </div>
