@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:9000/",
+    baseUrl: "https://nervous-bass-pocketbook.cyclic.app",
     prepareHeaders: async (headers, { getState, endpoint }) => {
       const token = await getState().auth?.accessToken;
       if (token) {
