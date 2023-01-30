@@ -29,7 +29,7 @@ const Table = ({ bills }) => {
       return f.name.toLowerCase().includes(name.toLowerCase());
     }
     if (email) {
-      return f.email.toLowerCase().includes(email.toLowerCase());
+      return f.email.toLowerCase() === email.toLowerCase();
     }
     if (phone) {
       return f.phone.includes(phone);
