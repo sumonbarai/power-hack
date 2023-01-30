@@ -17,7 +17,7 @@ const Pagination = () => {
         <button
           key={num}
           className={` ${
-            pageNumber === num ? "bg-red-500" : "bg-[#313641]"
+            pageNumber === num ? "bg-sky-200" : "bg-[#313641]"
           } m-2 p-2 text-white cursor-pointer`}
           onClick={() => dispatch(nextPage(num))}
         >

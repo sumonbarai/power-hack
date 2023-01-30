@@ -3,8 +3,7 @@ import { toast } from "react-hot-toast";
 import { useDeleteBillMutation } from "../features/billing/billingApi";
 
 const Bill = ({ data, control }) => {
-  const [deleteBill, { data: billDeleted, isSuccess }] =
-    useDeleteBillMutation();
+  const [deleteBill, { data: billDeleted }] = useDeleteBillMutation();
   const { _id, amount, billingId, email, name, phone } = data || {};
 
   // handle function

@@ -13,7 +13,6 @@ const BillBody = () => {
     data: bills,
     isLoading,
     isError,
-    isSuccess,
   } = useGetBillQuery(null, { refetchOnFocus: true });
 
   // remove demo data
